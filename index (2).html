@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Toy Store | Handmade Toys</title>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:wght@600;800&family=Nunito:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#2a0e3d;--bg2:#3b1456;--ink:#fff3e0;--mute:#e0c9ee;--gold:#ffb627;--pink:#ff6f9c;--teal:#17c3b2;--card:#4a1a6b;--paper:#fff3e0;--paperink:#2a0e3d;--bear:#c98a4b;
+box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#1b0828;--bg2:#27103a;--card:#341450;--paper:#2f1246;--paperink:#fff3e0}}
+:root[data-theme="dark"]{--bg:#1b0828;--bg2:#27103a;--card:#341450;--paper:#2f1246;--paperink:#fff3e0}
+html{scroll-behavior:smooth;scroll-padding-top:70px}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:400 1.05rem/1.65 Nunito,system-ui,sans-serif}
+h1,h2,h3{font-family:Fraunces,Georgia,serif;line-height:1.1;margin:0 0 .5em}
+a{color:inherit}
+:focus-visible{outline:3px solid var(--gold);outline-offset:3px}
+.wrap{max-width:1080px;margin:auto;padding:0 20px}
+header{position:sticky;top:0;z-index:10;background:var(--bg);border-bottom:2px solid var(--gold);padding-top:env(safe-area-inset-top,0px)}
+header .wrap{display:flex;align-items:center;justify-content:space-between;height:64px}
+.logo{font:800 1.6rem Fraunces,serif;text-decoration:none;color:var(--gold)}
+nav a{margin-left:22px;text-decoration:none;font-weight:700}
+nav a:hover{color:var(--gold)}
+#menu{display:none;background:none;border:2px solid var(--gold);color:var(--gold);border-radius:8px;padding:6px 12px;font:inherit;cursor:pointer}
+.hero{background:radial-gradient(circle at 80% 30%,var(--bg2),var(--bg) 70%);padding:56px 0}
+.hero .wrap{display:grid;grid-template-columns:1.1fr .9fr;gap:36px;align-items:center}
+.hero h1{font-size:clamp(2.4rem,6vw,4.2rem);font-weight:800}
+.hero p{color:var(--mute);max-width:48ch}
+.btn{display:inline-block;background:var(--gold);color:#2a0e3d;font-weight:700;padding:13px 26px;border-radius:40px;text-decoration:none;border:0;cursor:pointer;font-size:1rem;font-family:inherit}
+.btn.alt{background:none;color:var(--ink);border:2px solid var(--pink);margin-left:10px}
+.stage{background:var(--card);border:3px solid var(--gold);border-radius:32px;padding:22px;text-align:center}
+.stage svg{width:100%;max-width:280px}
+.sw{display:flex;gap:10px;justify-content:center;margin-top:10px}
+.sw button{width:36px;height:36px;border-radius:50%;border:3px solid var(--ink);cursor:pointer}
+.sw button[aria-pressed="true"]{outline:3px solid var(--gold);outline-offset:2px}
+.stage small{display:block;color:var(--mute);margin-top:8px}
+section{padding:72px 0}
+.story{background:var(--paper);color:var(--paperink)}
+.story .wrap{display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:center}
+.story h2,.shop h2,.custom h2,.contact h2{font-size:clamp(1.9rem,4vw,2.8rem)}
+.vals{display:flex;gap:14px;flex-wrap:wrap;margin-top:18px}
+.vals span{background:var(--pink);color:#2a0e3d;border-radius:30px;padding:6px 16px;font-weight:700}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:22px;margin-top:28px}
+.card{background:var(--card);border-radius:24px 24px 24px 6px;overflow:hidden;border:2px solid transparent;transition:.2s}
+.card:hover{border-color:var(--teal);transform:translateY(-4px)}
+.card svg{display:block;width:100%;height:190px}
+.card div{padding:16px 18px 20px}
+.card h3{font-size:1.25rem;margin-bottom:.3em}
+.card p{margin:0;color:var(--mute);font-size:.95rem}
+.tag{display:inline-block;margin-top:10px;color:var(--gold);font-weight:700}
+.custom{background:linear-gradient(135deg,#0b7a75,#17c3b2 140%);color:#fff}
+.custom .grid .card{background:rgba(42,14,61,.85)}
+form{display:grid;gap:12px;max-width:520px;margin-top:28px}
+input,select,textarea{padding:12px 14px;border-radius:12px;border:2px solid transparent;font:inherit;background:#fff3e0;color:#2a0e3d;width:100%}
+#ok{font-weight:700;margin:0;min-height:1.6em}
+.contact .wrap{display:grid;grid-template-columns:1fr 1fr;gap:30px}
+.box{background:var(--card);border-radius:24px;padding:26px;border-left:6px solid var(--pink)}
+.box a{color:var(--gold);font:800 1.6rem Fraunces,serif;text-decoration:none}
+footer{text-align:center;padding:26px 20px;background:#13051c;color:var(--mute);font-size:.9rem}
+.reveal{opacity:0;transform:translateY(16px);transition:.6s}
+.reveal.in{opacity:1;transform:none}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto!important}.reveal{opacity:1;transform:none}}
+@media (max-width:760px){
+#menu{display:block}
+nav{display:none;position:absolute;top:100%;left:0;right:0;background:var(--bg);padding:10px 20px 18px;border-bottom:2px solid var(--gold)}
+nav.open{display:block}nav a{display:block;margin:12px 0}
+.hero .wrap,.story .wrap,.contact .wrap{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+<header>
+<div class="wrap">
+<a class="logo" href="#top">Toy Store</a>
+<button id="menu" aria-expanded="false" aria-controls="nav">Menu</button>
+<nav id="nav"><a href="#story">Our story</a><a href="#shop">Shop</a><a href="#custom">Custom toys</a><a href="#contact">Contact</a></nav>
+</div>
+</header>
+
+<main id="top">
+<div class="hero"><div class="wrap">
+<div>
+<h1>Toys made by hand, loved for years.</h1>
+<p>Every toy at Toy Store tells a beautiful story of creativity and happiness. Stitched, carved and painted slowly, one piece at a time.</p>
+<p><a class="btn" href="#shop">See our toys</a><a class="btn alt" href="#custom">Design your own</a></p>
+</div>
+<div class="stage">
+<svg id="bear" viewBox="0 0 200 200" role="img" aria-label="Teddy bear you can recolour">
+<circle cx="52" cy="48" r="24" class="fur"/><circle cx="148" cy="48" r="24" class="fur"/>
+<circle cx="52" cy="48" r="12" fill="#ff6f9c"/><circle cx="148" cy="48" r="12" fill="#ff6f9c"/>
+<ellipse cx="100" cy="150" rx="52" ry="44" class="fur"/>
+<circle cx="100" cy="85" r="52" class="fur"/>
+<ellipse cx="100" cy="150" rx="30" ry="28" fill="#fff3e0" opacity=".55"/>
+<ellipse cx="100" cy="102" rx="22" ry="17" fill="#fff3e0"/>
+<circle cx="80" cy="78" r="6" fill="#2a0e3d"/><circle cx="120" cy="78" r="6" fill="#2a0e3d"/>
+<ellipse cx="100" cy="97" rx="8" ry="6" fill="#2a0e3d"/>
+<path d="M92 108q8 7 16 0" stroke="#2a0e3d" stroke-width="3" fill="none" stroke-linecap="round"/>
+<path d="M70 125l60 0 0 14-60 0z" fill="#ff6f9c" transform="rotate(-6 100 130)"/>
+<circle cx="100" cy="132" r="7" fill="#ffb627"/>
+</svg>
+<div class="sw" role="group" aria-label="Choose fur colour">
+<button style="background:#c98a4b" aria-label="Caramel" aria-pressed="true" data-c="#c98a4b"></button>
+<button style="background:#ff8fb1" aria-label="Rose" aria-pressed="false" data-c="#ff8fb1"></button>
+<button style="background:#17c3b2" aria-label="Teal" aria-pressed="false" data-c="#17c3b2"></button>
+<button style="background:#ffb627" aria-label="Sunny" aria-pressed="false" data-c="#ffb627"></button>
+<button style="background:#9b6bff" aria-label="Violet" aria-pressed="false" data-c="#9b6bff"></button>
+</div>
+<small>Pick a colour. Every toy can be made your way.</small>
+</div>
+</div></div>
+
+<section class="story" id="story"><div class="wrap">
+<div class="reveal">
+<h2>A toy begins with a small idea</h2>
+<p>A scrap of cloth, a block of wood, a child's favourite colour. We turn these into toys that get hugged, dropped, shared and kept. Nothing comes from a factory line, so no two toys are the same.</p>
+<div class="vals"><span>Handmade</span><span>Child-safe materials</span><span>Made with love</span></div>
+</div>
+<svg viewBox="0 0 400 300" role="img" aria-label="Illustration of a workbench with fabric, paint and a half-finished toy" style="width:100%">
+<rect width="400" height="300" rx="28" fill="#2a0e3d"/>
+<rect y="210" width="400" height="90" fill="#7a3b12"/><rect y="210" width="400" height="10" fill="#a8581e"/>
+<circle cx="320" cy="70" r="40" fill="#ffb627"/>
+<rect x="60" y="150" width="90" height="60" rx="8" fill="#17c3b2"/><rect x="72" y="130" width="66" height="30" rx="6" fill="#ff6f9c"/>
+<rect x="190" y="170" width="40" height="40" fill="#ffb627"/><rect x="205" y="140" width="40" height="40" fill="#ff6f9c"/><rect x="220" y="170" width="40" height="40" fill="#17c3b2"/>
+<path d="M290 210v-60l24-14 24 14v60z" fill="#9b6bff"/><circle cx="314" cy="170" r="9" fill="#fff3e0"/>
+<path d="M30 60q20-30 40 0t40 0" stroke="#ff6f9c" stroke-width="5" fill="none" stroke-linecap="round"/>
+</svg>
+</div></section>
+
+<section class="shop" id="shop"><div class="wrap">
+<h2 class="reveal">Toys with a story</h2>
+<p style="color:var(--mute);max-width:56ch">A few favourites from our shelf. Each one is made when you order, so it arrives fresh from our hands.</p>
+<div class="grid">
+<article class="card reveal"><svg viewBox="0 0 220 190"><rect width="220" height="190" fill="#17c3b2"/><circle cx="110" cy="100" r="46" fill="#e8e0f5"/><circle cx="82" cy="40" r="14" fill="#e8e0f5"/><circle cx="138" cy="40" r="14" fill="#e8e0f5"/><ellipse cx="90" cy="50" rx="10" ry="34" fill="#e8e0f5"/><ellipse cx="130" cy="50" rx="10" ry="34" fill="#e8e0f5"/><ellipse cx="90" cy="52" rx="5" ry="24" fill="#ff8fb1"/><ellipse cx="130" cy="52" rx="5" ry="24" fill="#ff8fb1"/><circle cx="94" cy="98" r="5" fill="#2a0e3d"/><circle cx="126" cy="98" r="5" fill="#2a0e3d"/><ellipse cx="110" cy="112" rx="6" ry="4" fill="#ff6f9c"/></svg><div><h3>Bella the Bunny</h3><p>Soft cotton, floppy ears. Made for bedtime stories.</p><span class="tag">Plush</span></div></article>
+<article class="card reveal"><svg viewBox="0 0 220 190"><rect width="220" height="190" fill="#ffb627"/><rect x="20" y="95" width="120" height="48" rx="8" fill="#c0392b"/><rect x="100" y="60" width="52" height="40" rx="6" fill="#2a0e3d"/><rect x="140" y="105" width="58" height="38" rx="8" fill="#9b6bff"/><circle cx="48" cy="150" r="17" fill="#2a0e3d"/><circle cx="105" cy="150" r="17" fill="#2a0e3d"/><circle cx="170" cy="150" r="17" fill="#2a0e3d"/><circle cx="48" cy="150" r="6" fill="#ffb627"/><circle cx="105" cy="150" r="6" fill="#ffb627"/><circle cx="170" cy="150" r="6" fill="#ffb627"/><rect x="38" y="52" width="14" height="46" fill="#7a3b12"/></svg><div><h3>Choo-Choo Train</h3><p>Hand-carved wood with smooth, painted wheels.</p><span class="tag">Wooden</span></div></article>
+<article class="card reveal"><svg viewBox="0 0 220 190"><rect width="220" height="190" fill="#ff6f9c"/><rect x="108" y="30" width="6" height="130" fill="#7a3b12"/><ellipse cx="110" cy="152" rx="62" ry="13" fill="#2a0e3d"/><ellipse cx="110" cy="136" rx="52" ry="12" fill="#17c3b2"/><ellipse cx="110" cy="116" rx="42" ry="11" fill="#ffb627"/><ellipse cx="110" cy="97" rx="33" ry="10" fill="#9b6bff"/><ellipse cx="110" cy="80" rx="24" ry="9" fill="#fff3e0"/><circle cx="110" cy="56" r="17" fill="#c0392b"/></svg><div><h3>Rainbow Stacker</h3><p>Chunky rings that teach colours and balance.</p><span class="tag">Learning</span></div></article>
+<article class="card reveal"><svg viewBox="0 0 220 190"><rect width="220" height="190" fill="#9b6bff"/><ellipse cx="110" cy="110" rx="48" ry="55" fill="#fff3e0"/><path d="M62 98q48-90 96 0z" fill="#ff6f9c"/><circle cx="92" cy="115" r="5" fill="#2a0e3d"/><circle cx="128" cy="115" r="5" fill="#2a0e3d"/><path d="M98 132q12 9 24 0" stroke="#2a0e3d" stroke-width="3" fill="none" stroke-linecap="round"/><circle cx="82" cy="128" r="8" fill="#ff8fb1" opacity=".7"/><circle cx="138" cy="128" r="8" fill="#ff8fb1" opacity=".7"/></svg><div><h3>Mira the Doll</h3><p>Hand-stitched dress, yarn hair, a big smile.</p><span class="tag">Doll</span></div></article>
+</div>
+</div></section>
+
+<section class="custom" id="custom"><div class="wrap">
+<h2 class="reveal">Customised toys, made just for you</h2>
+<p style="max-width:58ch">Tell us a name, a colour or a favourite animal. Here are a few toys we made for families like yours.</p>
+<div class="grid">
+<article class="card reveal"><svg viewBox="0 0 220 190"><rect width="220" height="190" fill="#ffb627"/><circle cx="55" cy="45" r="20" fill="#8a4b2a"/><circle cx="165" cy="45" r="20" fill="#8a4b2a"/><circle cx="110" cy="95" r="60" fill="#8a4b2a"/><ellipse cx="110" cy="112" rx="26" ry="20" fill="#fff3e0"/><circle cx="88" cy="85" r="6" fill="#2a0e3d"/><circle cx="132" cy="85" r="6" fill="#2a0e3d"/><ellipse cx="110" cy="106" rx="8" ry="6" fill="#2a0e3d"/><text x="110" y="178" text-anchor="middle" font-family="Fraunces,serif" font-weight="800" font-size="20" fill="#2a0e3d">ARYA</text></svg><div><h3>Name-embroidered bear</h3><p>A birthday gift with her name stitched on.</p></div></article>
+<article class="card reveal"><svg viewBox="0 0 220 190"><rect width="220" height="190" fill="#ff6f9c"/><path d="M110 40l18 38 42 6-30 30 8 42-38-20-38 20 8-42-30-30 42-6z" fill="#ffb627"/><circle cx="96" cy="95" r="5" fill="#2a0e3d"/><circle cx="124" cy="95" r="5" fill="#2a0e3d"/><path d="M98 108q12 9 24 0" stroke="#2a0e3d" stroke-width="3" fill="none" stroke-linecap="round"/></svg><div><h3>Lucky star friend</h3><p>Made in a child's favourite colours.</p></div></article>
+<article class="card reveal"><svg viewBox="0 0 220 190"><rect width="220" height="190" fill="#17c3b2"/><rect x="40" y="110" width="140" height="44" rx="22" fill="#fff3e0"/><circle cx="170" cy="100" r="30" fill="#fff3e0"/><path d="M160 76l4-24 14 16z" fill="#fff3e0"/><circle cx="177" cy="96" r="5" fill="#2a0e3d"/><path d="M40 125q-26-10-14-36" stroke="#fff3e0" stroke-width="10" fill="none" stroke-linecap="round"/><rect x="58" y="150" width="12" height="26" rx="5" fill="#fff3e0"/><rect x="146" y="150" width="12" height="26" rx="5" fill="#fff3e0"/></svg><div><h3>Pet look-alike</h3><p>Send a photo, we sew a tiny copy of your pet.</p></div></article>
+</div>
+<form id="f">
+<input id="n" required placeholder="Your name" aria-label="Your name">
+<select id="t" aria-label="Toy type"><option>Teddy bear</option><option>Bunny</option><option>Doll</option><option>Wooden toy</option><option>Something else</option></select>
+<textarea id="d" rows="3" placeholder="Tell us the colours, name or idea" aria-label="Your idea"></textarea>
+<button class="btn" type="submit">Send my toy idea</button>
+<p id="ok" role="status"></p>
+</form>
+</div></section>
+
+<section class="contact" id="contact"><div class="wrap">
+<div class="box reveal"><h2>Call us</h2><p>Talk to us about any toy, and we will help you choose.</p><a href="tel:5467812346">5467812346</a></div>
+<div class="box reveal" style="border-color:var(--teal)"><h2>Visit us</h2><p>Toy Store<br>Near Bus Stand</p><p style="color:var(--mute);margin:0">Come in, hold the toys, meet the people who make them.</p></div>
+</div></section>
+</main>
+
+<footer>&copy; Toy Store. Handmade with love. Call 5467812346 &middot; Near Bus Stand</footer>
+
+<script>
+var m=document.getElementById('menu'),nv=document.getElementById('nav');
+m.addEventListener('click',function(){var o=nv.classList.toggle('open');m.setAttribute('aria-expanded',o)});
+nv.addEventListener('click',function(){nv.classList.remove('open');m.setAttribute('aria-expanded','false')});
+var fur=document.querySelectorAll('#bear .fur'),sw=document.querySelectorAll('.sw button');
+function paint(c){fur.forEach(function(e){e.setAttribute('fill',c)})}
+paint('#c98a4b');
+sw.forEach(function(b){b.addEventListener('click',function(){paint(b.dataset.c);sw.forEach(function(x){x.setAttribute('aria-pressed',x===b)})})});
+document.getElementById('f').addEventListener('submit',function(e){e.preventDefault();
+document.getElementById('ok').textContent='Thank you, '+document.getElementById('n').value+'! Please call 5467812346 to confirm your '+document.getElementById('t').value.toLowerCase()+'.';this.reset()});
+var io=new IntersectionObserver(function(a){a.forEach(function(x){if(x.isIntersecting){x.target.classList.add('in');io.unobserve(x.target)}})},{threshold:.15});
+document.querySelectorAll('.reveal').forEach(function(e){io.observe(e)});
+</script>
+</body>
+</html>
